@@ -1,0 +1,146 @@
+SELECT last_name, job_id, salary
+FROM employees
+WHERE salary = 
+(
+SELECT MIN(salary)
+FROM employees
+
+)
+
+
+SELECT MIN(salary),department_id
+FROM employees
+GROUP BY department_id
+HAVING MIN(salary) > 2100 
+
+
+
+
+SELECT MIN(salary),department_id
+FROM employees
+GROUP BY department_id
+HAVING MIN(salary) > 
+(
+SELECT MIN(salary)
+FROM employees
+WHERE department_id = 50
+)
+
+
+
+SELECT AVG(salary),job_id
+FROM employees
+GROUP BY job_id
+HAVING AVG(salary) = 
+(
+SELECT MIN(AVG(salary))
+FROM employees
+GROUP BY job_id
+)
+
+
+
+// genrate error bcz single-row subquery returns more than one row
+SELECT  employee_id,last_name
+FROM employees
+WHERE salary = (
+SELECT MIN(salary)
+FROM employees
+GROUP BY department_id
+)
+
+
+
+// it run 
+SELECT  employee_id,last_name
+FROM employees
+WHERE salary IN (
+SELECT MIN(salary)
+FROM employees
+GROUP BY department_id
+)
+
+
+SELECT  employee_id,last_name
+FROM employees
+WHERE job_id = (
+SELECT  job_id
+FROM employees
+WHERE last_name = 'Haas'
+)
+
+
+
+
+SELECT job_id, last_name, salary
+FROM employees
+WHERE salary = ANY(
+SELECT MIN(salary)
+FROM employees
+GROUP By department_id
+)
+
+
+
+SELECT  last_name, salary, department_id
+FROM employees
+WHERE salary IN (
+SELECT MIN(salary)
+FROM employees
+GROUP By department_id
+)
+
+
+
+SELECT  employee_id,last_name,job_id, salary
+FROM employees
+WHERE salary < ANY(
+SELECT salary
+FROM employees
+WHERE job_id = 'IT_PROG'
+)
+
+AND job_id <> 'IT_PROG'
+
+
+
+
+SELECT  employee_id,last_name,job_id, salary
+FROM employees
+WHERE salary < ALL(
+SELECT salary
+FROM employees
+WHERE job_id = 'IT_PROG'
+)
+
+AND job_id <> 'IT_PROG'
+
+
+
+
+
+SELECT  emp.last_name
+FROM employees emp
+WHERE emp.employee_id NOT IN (
+                                SELECT mgr.manager_id
+                                FROM employees mgr
+                             )
+
+
+SELECT  emp.last_name
+FROM employees emp
+WHERE emp.employee_id IN (
+                                SELECT mgr.manager_id
+                                FROM employees mgr
+                             )
+
+
+
+SELECT  last_name
+FROM employees
+WHERE employee_id NOT IN (
+                                 SELECT manager_id
+                                 FROM employees
+                                 WHERE manager_id IS NOT NULL
+
+                             )

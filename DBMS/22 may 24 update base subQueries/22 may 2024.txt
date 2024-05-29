@@ -1,0 +1,98 @@
+UPDATE employees
+SET job_id = (SELECT job_id 
+               FROM employees
+               WHERE employee_id = 205
+),
+salary = (
+               SELECT salary
+               FROM employees
+               WHERE employee_id = 205
+)
+
+WHERE employee_id = 114
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE copy_dept (
+ department_id NUMBER(4),
+ department_name VARCHAR2(30),
+ manager_id NUMBER(6),
+ location_id NUMBER(4)
+ 
+);
+
+// check table create or not
+SELECT  *
+from  copy_dept 
+
+// copy data 
+INSERT INTO copy_dept
+SELECT *
+FROM departments
+
+
+// delete copy table
+DELETE FROM  copy_dept
+
+// NOTE Autocommit ke check ko disable kar dena
+// execute this command for get data jo data apne delete kar diya tha 
+rollback
+
+
+// check table 
+SELECT * FROM tab
+
+
+// note : agar row primary ho to delete nahi honga constraint error denga
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELETE FROM employees
+WHERE department_id =(
+SELECT department_id FROM departments
+WHERE department_name LIKE '%Public%'
+);
+
+SELECT employee_id FROM employees
+
+
+
+
+
+
+
+// Truncate Statement  
+
+
+
+
+
+
+
+
+
+
+
+
+
+// DDL (Data Defination Language)

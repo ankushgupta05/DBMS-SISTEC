@@ -1,0 +1,30 @@
+SELECT * 
+FROM sys.user_constraints
+
+
+
+
+
+
+SELECT * 
+FROM sys.user_constraints
+WHERE table_name = 'EMPLOYEES'
+
+
+// TABLE CONSTRAIN DISABLE
+ALTER TABLE emp3
+DISABLE CONSTRAINTS EMP3_EMP_ID_PK_A
+
+
+
+
+// TABLE CONSTRAIN ENABLE
+ALTER TABLE emp3
+ENABLE CONSTRAINTS EMP3_EMP_ID_PK_A	
+
+
+
+// insert row in emp3 
+INSERT INTO emp3 
+VALUES (10,'nikhil','vishwa','nikhil@gmail.com','8754687866', '10-JUN-2024', 'carpeter',110000,NULL,45345,3346);
+
